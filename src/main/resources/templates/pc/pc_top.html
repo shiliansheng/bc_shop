@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+pc_top.html
+
+<div th:text="${test}">页面内容</div>
+<div th:text="${cs}">cs</div>
+<span th:each="cookie :${#httpServletRequest.getCookies()}"
+      th:if="${cookie.getName().equals('u_name')}"
+      th:text="${cookie.getValue()}">
+</span>

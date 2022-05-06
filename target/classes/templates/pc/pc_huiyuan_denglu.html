@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/toubu_fanhui.css">
+    <link rel="stylesheet" href="css/huiyuan_zhuce.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_denglu.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>&nbsp;</td>
+        <td width="1200">
+
+
+
+            <table width="100%" border="0">
+                <tr>
+                    <td  align="right"><img src="img/bg2.png" height="500" ></td>
+                    <td  align="center" width="50%" >
+
+                        <form name="form1" method="post">
+                            <div class="denglu">
+                                <div class="denglu_mingcheng">欢迎登陆</div>
+                                <div class="denglu_xiangmu">
+                                    <img src="img/yonghu.png" class="denglu_xiangmu_img" />
+                                    <!--用户名：手机号-->
+                                    <input type="text" placeholder="请输入用户名" class="denglu_xiangmu_input" name="yhm" id="yhm" style="color: white;">
+                                </div>
+                                <br>
+                                <div class="denglu_xiangmu">
+                                    <img src="img/mima.png" class="denglu_xiangmu_img" />
+                                    <!--登录密码-->
+                                    <input type="password" placeholder="请输入密码" class="denglu_xiangmu_input" name="mm" id="mm" style="color: white;">
+                                </div>
+
+                                <br>
+                                <!--登录提交按钮-->
+                                <input  class="denglu_putong" type="button" value="立即登录" onClick="return check_login();" style="border: 0;outline: none;margin: 0; cursor: pointer;">
+
+                                <!--下面是JS验证和提交代码-->
+                                <script>
+                                    //验证用户名和密码是否填写填写;填写后提交到用户登录接口验证
+                                    function check_login()
+                                    {
+                                        //如果用户名和密码其中任一个都没有填写，提示错误
+                                        if(document.form1.yhm.value=="" || document.form1.mm.value==""){
+                                            alert("请填写你的账户和密码！"); //弹出提示
+                                            return false;  //中断执行和提交
+                                        }
+                                        //下面是提交验证代码
+                                        var yhm=document.form1.yhm.value; //获取输入的用户名的值
+                                        var mm=document.form1.mm.value;   //获取输入的密码的值
+                                        //定义了一个隐藏的iframe，然后将数据作为参数加载到页面check_h_login.php来验证登录
+                                        //这里你也可以用AJAX、Xmlhttp等方式来处
+                                        frame01.location = "check_mem_login?cs_yhm=" + yhm + "&cs_mm=" + mm;
+                                    }
+                                </script>
+                                <!--div class="denglu_weixin">微信登录</div-->
+                                <iframe width="0" height="0" frameborder="0" name="frame01" src=""></iframe>
+
+                                <br>
+                                <br>
+
+
+                                </div>
+
+
+                            </div>
+
+                        </form>
+
+                    </td>
+                    <td  width="50">&nbsp;</td>
+                </tr>
+            </table>
+
+
+
+
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

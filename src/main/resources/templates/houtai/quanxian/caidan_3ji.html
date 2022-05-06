@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+    <script src="js/liandong.js"></script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[菜单设置]-[3级菜单]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="250" valign="top">
+
+
+                    <form name="form1" method="post" action="/quanxian_caidan_3ji">
+
+                        <!--输出1级分类，供选择-开始-->
+                        <div id="bigclass" style="float:left">
+                        <select name="menu1" id="menu1" onchange="javascript:this.form.submit();">
+                            <option  value="0">请选择1级分类</option>
+                            <option  th:value="${quanxian1.id}" th:each="quanxian1 : ${list_quanxian1}" th:selected="${quanxian1.id}==${menu1}">
+                                <span th:text="${quanxian1.caidan_mingcheng}"></span>
+                            </option>
+                        </select>
+                        </div>
+                        <!--输出1级分类，供选择-结束-->
+
+                        <!--输出2级分类，供选择-开始-->
+                        <select name="menu2" id="menu2" onchange="menu2_check();">
+                            <option  value="0">请选择2级分类</option>
+                            <option  th:value="${quanxian2.id}" th:each="quanxian2 : ${list_quanxian2}">
+                                <span th:text="${quanxian2.caidan_mingcheng}"></span>
+                            </option>
+                        </select>
+                        <script type="text/javascript">
+                            function menu2_check(){
+                                //alert(document.getElementById("menu2").value); //1级权限的id
+                                document.getElementById("if_j3").src = "/quanxian_caidan_3ji_nei?quanxian2_id=" + document.getElementById("menu2").value;
+                            }
+                        </script>
+                        <!--输出1级分类，供选择-结束-->
+
+                        <div id="j3"  style="float:left">
+                            <iframe  style="width:96vw;" name="if_j3" id="if_j3" height="500" > </iframe>
+                        </div>
+
+                    </form>
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td>&nbsp;</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

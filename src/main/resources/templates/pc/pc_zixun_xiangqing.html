@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc/pc_guanyu_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <!--信息内容 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    <span th:text="${xinxi.xinxi_biaoti}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+                                    <!--信息统计数据 开始-->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                                        <tr>
+                                            <td width="80%" style="padding:10px;color:#666;">
+                                                发布日期：<span th:text="${xinxi.xinxi_riqi}"></span>|&nbsp;&nbsp;&nbsp;
+                                                阅读：<span th:text="${xinxi.liulanshu}"></span> &nbsp;|&nbsp;&nbsp;&nbsp;
+                                                收藏：<span th:text="${size_shoucangshu}"></span> &nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                                评论：<span th:text="${size_pinglunshu}"></span>
+
+                                            </td>
+                                            <td  width="20%" style="padding:10px;color:#666;" align="center">
+
+                                                <span th:if="${#session.getAttribute('mem_id')!=null}">
+                                                    <input  type="button"  style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px; border:0;"
+                                                            value=" 收藏该文档 "
+                                                            th:onclick="'javascript:shoucang('+${xinxi.id}+')' "
+                                                    >
+                                                 <!--   <span th:text="${#session.getAttribute('mem_id')}"></span>  -->
+                                                    <!--下面是JS验证和提交代码-->
+                                                    <script>
+                                                        function shoucang(xinxi_id)
+                                                        {
+                                                            var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                                            //alert(mem_id + "|" + xinxi_id);
+                                                            var url = "/api_zixun_shoucang?u_id="+mem_id+"&xinxi_id="+xinxi_id;
+                                                            //alert(url);
+                                                            frame01.location = url;
+                                                        }
+                                                    </script>
+                                                </span>
+                                                <span th:if="${#session.getAttribute('mem_id')==null}">
+                                                    登录后收藏
+                                                </span>
+                                                <iframe width="0" height="0" frameborder="0" name="frame01" src=""></iframe>
+                                            </td>
+                                    </table>
+                                    <!--信息统计数据 结束-->
+                                    <hr>
+
+                                    <!--信息上页下页 开始-->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#F2F2F2">
+                                        <tr>
+                                            <td width="50%" style="padding:10px;">
+
+                                                <a  th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${id_xia})}" th:if="${id_xia>0}" >
+                                                    下一篇：<span th:text="${biaoti_xia}"></span>
+                                                </a>
+                                                <span th:if="${id_xia==0}">下一篇：暂无</span>
+
+                                            </td>
+                                            <td  width="50%" style="padding:10px;">
+                                                <a  th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${id_shang})}" th:if="${id_shang>0}" >
+                                                    上一篇：：<span th:text="${biaoti_shang}"></span>
+                                                </a>
+                                                <span th:if="${id_shang==0}">上一篇：暂无</span>
+                                            </td>
+                                    </table>
+                                    <!--信息上页下页 结束-->
+
+
+                                    <span th:utext="${xinxi.xinxi_neirong}"></span>
+
+
+                                    <!--信息上页下页 开始-->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#F2F2F2">
+                                        <tr>
+                                            <td width="50%" style="padding:10px;">
+
+                                                <a  th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${id_xia})}" th:if="${id_xia>0}" >
+                                                    下一篇：<span th:text="${biaoti_xia}"></span>
+                                                </a>
+                                                <span th:if="${id_xia==0}">下一篇：暂无</span>
+
+                                            </td>
+                                            <td  width="50%" style="padding:10px;">
+                                                <a  th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${id_shang})}" th:if="${id_shang>0}" >
+                                                    上一篇：：<span th:text="${biaoti_shang}"></span>
+                                                </a>
+                                                <span th:if="${id_shang==0}">上一篇：暂无</span>
+                                            </td>
+                                    </table>
+                                    <!--信息上页下页 结束-->
+
+
+
+                                    <!--评论 开始-->
+                                    <form name="frm" method="post">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td  width="60%" style="padding:5px;">
+                                                    <textarea cols="70" rows="4" name="neirong" id="neirong"></textarea>
+                                                </td>
+                                                <td  style="padding:3px;" valign="top">
+                                                    评论区，不可发布不当言论；评论审核后可见！<br>
+
+                                                <span th:if="${#session.getAttribute('mem_id')!=null}">
+                                                    <input  type="button"  style="border:none;background-color: red;color: white;padding: 5px;border-radius: 5px;" value=" 提交评论信息 "
+                                                            th:onclick="'javascript:pinglun('+${xinxi.id}+')' ">
+                                                    <!--下面是JS验证和提交代码-->
+                                                    <script>
+                                                        function pinglun(xinxi_id)
+                                                        {
+                                                            //下面判断密码和确认密码必须填写
+                                                            if(document.frm.neirong.value=="") //为空
+                                                            {
+                                                                alert("请输入评论");  //弹出提示错误
+                                                                document.frm.neirong.focus();//重新获得焦点
+                                                            }else{
+                                                                var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                                                var neirong = document.frm.neirong.value;
+                                                                var url = "api_zixun_pinglun_add?u_id="+mem_id+"&xinxi_id="+xinxi_id+"&neirong="+neirong;
+                                                                //alert(url);
+                                                                frm01.location = url;
+                                                                document.frm.neirong.value="";
+                                                            }
+
+                                                        }
+                                                    </script>
+                                                    <iframe name="frm01" src="" width="0" height="0" frameborder="0"></iframe>
+                                                </span>
+                                                <span th:if="${#session.getAttribute('mem_id')==null}">
+                                                    <span style="color:#ff0000;">请登录后发表评论</span>
+                                                </span>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                                        <tr th:each="pinglun :${list_pinglun}">
+                                            <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;">
+                                                <span  style="color:#999;" th:text="${pinglun.riqi}"></span>
+                                                <span  style="color:#999;" th:text="${pinglun.neirong}"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--评论 结束-->
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--信息内容 结束-->
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

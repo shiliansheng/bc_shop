@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[订单中心]-[订单处理]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150">
+
+                    <form action="houtai_dingdan_chuli?act=chuli" method="post"  name="form_add">
+                        <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+                            <tr bgcolor="#FFFFFF">
+                                <td width="12%" height="30"><div align="center">当前状态</div>
+                                    <input type="hidden" name="dingdan_id" th:value="${xinxi.id}">
+                                </td>
+                                <td width="88%">
+                                    <!--1在购物车，还没付款；2购物车转到订单了；3已经付款，还没发货；4已经发货，流程ok -->
+                                    <select name="zt" >
+                                        <option value="2" th:selected="${xinxi.zt==2}">(2)提交订单，未付款</option>
+                                        <option value="3" th:selected="${xinxi.zt==3}">(3)已经付款，还没发货</option>
+                                        <option value="4" th:selected="${xinxi.zt==4}">(4)已经发货，流程ok</option>
+                                    </select><br><br>
+
+                                    发货信息:<br>
+                                    <textarea name="beizhu_fahuo" id="beizhu_fahuo" cols="50" rows="2"
+                                              th:value="${xinxi.beizhu_fahuo}"></textarea>(例：中通快递，单号885888) <br><br>
+
+                                    操作备注:<br>
+                                    <textarea name="beizhu_caozuo" id="beizhu_caozuo" cols="50" rows="2"
+                                              th:value="${xinxi.beizhu_caozuo}"></textarea>(例：老客户)
+                                </td>
+                            </tr>
+                            <tr bgcolor="#FFFFFF" >
+                                <td height="30">&nbsp;</td>
+                                <td height="30">
+                                    <input type="submit" value="修改信息" >&nbsp;
+                                    <a href="javascript:history.go(-1)">返回上一页</a></td>
+                            </tr>
+                        </table>
+                    </form>
+
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td  style="font-size:11px; color:gray;">  </td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

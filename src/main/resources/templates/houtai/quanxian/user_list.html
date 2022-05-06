@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[管理员 列表]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="250" valign="top">
+
+
+
+
+                    <table width="99%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F9F9F9">
+                        <tr>
+                            <td bgcolor="#F7F7F7" width="20%">时间</td>
+                            <td bgcolor="#F7F7F7" width="20%">账号</td>
+                            <td bgcolor="#F7F7F7" width="20%">备注</td>
+                            <td bgcolor="#F7F7F7" width="20%">角色</td>
+                            <td bgcolor="#F7F7F7" width="20%">&nbsp;</td>
+                        </tr>
+                        <tr  th:each="zhanghao : ${list1}">
+                            <td style='border-bottom: 1px dotted #eeeeee;' th:text="${zhanghao.add_date}"></td>
+                            <td style='border-bottom: 1px dotted #eeeeee;' th:text="${zhanghao.user_name}"></td>
+                            <td style='border-bottom: 1px dotted #eeeeee;' th:text="${zhanghao.beizhu}"></td>
+                            <td style='border-bottom: 1px dotted #eeeeee;'  >
+                                <span th:if="${zhanghao.fenzu_id==8}">普通用户</span>
+                                <span th:if="${zhanghao.fenzu_id==7}">管理员</span>
+                            </td>
+                            <td style='border-bottom: 1px dotted #eeeeee;'>
+                                <a th:attr="href=@{/quanxian_user_xiugai(act='xiugai',zhanghao_id=${zhanghao.id}) }">
+                                    修改</a>
+                                &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+                                <a th:attr="href=@{/quanxian_user_xiugai(act='del',zhanghao_id=${zhanghao.id}) }">删除</a>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td>&nbsp;</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

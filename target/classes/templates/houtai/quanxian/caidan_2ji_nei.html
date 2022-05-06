@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+</head>
+<body>
+
+
+<p th:text="${caozuo}"></p>
+<div th:if="${caozuo}=='xiugai'">
+    <!--修改功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_2ji_nei?act=xiugai_act">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    2级菜单名称 <input type="text" size="20" name="quanxian2_mc" th:value="${quanxian2_mc}">
+                    排序ID <input type="number" name="paixu_id" style="width: 50px;" th:value="${paixu_id}">
+                    <input type="submit" value=" 修改2级菜单信息 " onClick="return checkinfo();">（id越大排序在前面）
+                    <input type="hidden" name="quanxian2_id" th:value="${quanxian2_id}" />
+                    <input type="hidden" name="quanxian1_id" th:value="${quanxian1_id}" />
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.quanxian2_mc.value=="")
+                {
+                    document.form_add.quanxian2_mc.focus();
+                    alert("对不起，请填写2级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--修改功能-结束-->
+</div>
+<div th:unless="${caozuo}=='xiugai'">
+    <!--添加功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_2ji_nei?act=add">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    2级菜单名称 <input type="text" size="20" name="quanxian2_mc">
+                    排序ID <input type="number" name="paixu_id" style="width: 50px;" value="1">
+                    <input type="submit" value=" 添加2级菜单 " onClick="return checkinfo();">（id越大排序在前面）
+                    <input type="hidden" name="quanxian1_id" th:value="${quanxian1_id}" />
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.quanxian2_mc.value=="")
+                {
+                    document.form_add.quanxian2_mc.focus();
+                    alert("对不起，请填写2级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--添加功能-结束-->
+</div>
+
+
+<!--列表-开始-->
+<table width='100%'  cellpadding='5' cellspacing='0' >
+    <tr  th:each="list_quanxian2 : ${list2}">
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian2.caidan_mingcheng}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian2.paixu_id}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;'>
+            <a th:attr="href=@{/quanxian_caidan_2ji_nei(act='xiugai',quanxian1_id=${quanxian1_id},quanxian2_id=${list_quanxian2.id},quanxian2_mc=${list_quanxian2.caidan_mingcheng},paixu_id=${list_quanxian2.paixu_id})}">
+                修改</a>
+            &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <a th:attr="href=@{/quanxian_caidan_2ji_nei(act='del',quanxian1_id=${quanxian1_id},quanxian2_id=${list_quanxian2.id})}">删除</a>
+        </td>
+    </tr>
+</table>
+<!--列表-开始-->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆购物商城系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    会员中心首页
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                    <!--资讯浏览列表 开始-->
+                                    <table width="99%"  cellspacing="3" cellpadding="5" bgcolor="#EEEEEE">
+                                        <tr>
+                                            <td bgcolor="#F7F7F7" width="15%">时间</td>
+                                            <td bgcolor="#F7F7F7" width="30%">标题</td>
+                                            <td bgcolor="#F7F7F7" width="20%">类型</td>
+                                            <td bgcolor="#F7F7F7" width="20%">评论内容</td>
+                                            <td bgcolor="#F7F7F7" width="15%">状态</td>
+                                        </tr>
+                                        <tr  th:each="xinxi : ${xinxi_list}">
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.riqi}"></td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                                <a th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${xinxi.id})}" target="_blank" >
+                                                    <span  th:text="${xinxi.xinxi_biaoti}"></span>
+                                                </a>
+                                            </td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.caidan_mingcheng}">></td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                                <span  th:text="${xinxi.neirong}"></span>
+                                            </td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;'>
+                                                <span style="color: red;" th:if="${xinxi.shenhe}==0">待审核</span>
+                                                <span th:if="${xinxi.shenhe}==1">已审核</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <a href="/houtai_yonghu_list?pageNumber=0">首页</a>
+                                    <a th:href="@{'pc_mem_zixun_pinglun?pageNumber='+${shang}}">上页</a>
+                                    <a th:href="@{'pc_mem_zixun_pinglun?pageNumber='+${xia}}">下页</a>
+                                    <a th:href="@{'pc_mem_zixun_pinglun?pageNumber='+${pageCount}}">尾页</a>
+
+                                    <span th:text="${size}"></span> 条数据 |
+                                    总 <span th:text="${pageCount+1}"></span> 页 |
+                                    当前 <span th:text="${curPage+1}"></span> 页
+
+                                    <!--资讯浏览列表 结束-->
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

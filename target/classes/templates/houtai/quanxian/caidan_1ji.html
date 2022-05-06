@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[菜单设置]-[1级菜单]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+        <td  height="250" valign="top">
+
+
+
+<p th:text="${caozuo}"></p>
+<div th:if="${caozuo}=='xiugai'">
+    <!--修改功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_1ji?act=xiugai_act">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    1级菜单名称 <input type="text" size="20" name="mingcheng" th:value="${quanxian1_mc}">
+                    排序ID <input type="number" name="paixu" style="width: 50px;" th:value="${quanxian1_paixu_id}">
+                    <input type="submit" value=" 修改1级菜单信息 " onClick="return checkinfo();">（id越大排序在前面）
+                    <input type="hidden" name="quanxian1_id" th:value="${quanxian1_id}" />
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.mingcheng.value=="")
+                {
+                    document.form_add.mingcheng.focus();
+                    alert("对不起，请填写1级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--修改功能-结束-->
+</div>
+<div th:unless="${caozuo}=='xiugai'">
+    <!--添加功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_1ji?act=add">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    1级菜单名称 <input type="text" size="20" name="mingcheng">
+                    排序ID <input type="number" name="paixu" style="width: 50px;" value="1">
+                    <input type="submit" value=" 添加1级菜单 " onClick="return checkinfo();">（id越大排序在前面）
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.mingcheng.value=="")
+                {
+                    document.form_add.mingcheng.focus();
+                    alert("对不起，请填写1级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--添加功能-结束-->
+</div>
+
+
+<!--列表-开始-->
+<table width='100%'  cellpadding='5' cellspacing='0' >
+    <tr  th:each="list_quanxian1 : ${list1}">
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian1.caidan_mingcheng}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian1.paixu_id}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;'>
+            <a th:attr="href=@{/quanxian_caidan_1ji(act='xiugai',quanxian1_id=${list_quanxian1.id},quanxian1_mc=${list_quanxian1.caidan_mingcheng},quanxian1_paixu_id=${list_quanxian1.paixu_id})}">
+                修改</a>
+            &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <a th:attr="href=@{/quanxian_caidan_1ji(act='del',quanxian1_id=${list_quanxian1.id})}">删除</a>
+        </td>
+    </tr>
+</table>
+<!--列表-开始-->
+
+
+
+        
+        
+        
+        </td>
+        <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+        <td>&nbsp;</td>
+        <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

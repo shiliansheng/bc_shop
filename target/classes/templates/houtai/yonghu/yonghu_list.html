@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[用户中心]-[用户列表]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150" valign="top">
+
+
+
+
+                    <table width="99%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">
+                        <tr>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>注册时间</strong></td>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>账号</strong></td>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>头像</strong></td>
+                            <td bgcolor="#E0F3FF"  width="20%"><strong>概要</strong></td>
+                            <td bgcolor="#E0F3FF"  width="35%"><strong>简介</strong></td>
+                            <td bgcolor="#E0F3FF"  width="15%">&nbsp;</td>
+                        </tr>
+                        <tr  th:each="xinxi : ${xinxi_list}">
+                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.add_riqi}"></td>
+                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.shouji}"></td>
+                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                <img th:src="'upload/'+${xinxi.touxiang}"/>
+                            </td>
+                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                姓名：<span th:text="${xinxi.xingming}"></span><br>
+                                QQ：<span th:text="${xinxi.qq}"></span><br>
+                                邮箱：<span th:text="${xinxi.youxiang}"></span>
+                            </td>
+                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.jianjie}"></td>
+                            <td bgcolor="#FFFFFF"  >
+                                <a th:attr="href=@{/houtai_yonghu_del(yonghu_id=${xinxi.id})}">删除</a>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+
+
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td  style="font-size:11px; color:gray;">
+
+                    <a href="/houtai_yonghu_list?pageNumber=0">首页</a>
+                    <a th:href="@{'houtai_yonghu_list?pageNumber='+${shang}}">上页</a>
+                    <a th:href="@{'houtai_yonghu_list?pageNumber='+${xia}}">下页</a>
+                    <a th:href="@{'houtai_yonghu_list?pageNumber='+${pageCount}}">尾页</a>
+
+                    <span th:text="${size}"></span> 条数据 |
+                    总 <span th:text="${pageCount+1}"></span> 页 |
+                    当前 <span th:text="${curPage+1}"></span> 页
+
+                </td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+
+    <link rel="stylesheet" href="css/huiyuan_shoucang.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    会员中心 > 商品收藏列表
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                    <div class="shoucang" th:each="shoucang : ${list_dingdan}" >
+                                        <div class="shoucang_zuo">
+                                            <img  th:src="'upload/'+${shoucang.cp_tupian}" class="shoucang_zuo_img" />
+                                        </div>
+                                        <div class="shoucang_zhong">
+                                            <div class="shoucang_zhong_txt1">
+                                                <p  th:text="${shoucang.mingcheng}"></p>
+                                            </div>
+                                            <div class="shoucang_zhong_txt2">
+                                                库存：<span th:text="${shoucang.kucun}"></span> | 销量：<span th:text="${shoucang.yixiaoshou}"></span> 件
+                                            </div>
+                                            <div class="shoucang_zhong_txt3">单价：¥<span th:text="${shoucang.jiage1}"></span> </div>
+                                        </div>
+                                        <a class="shoucang_you"
+                                           th:href="@{/pc_mem_shangpin_shoucang_del(shoucang_id=${shoucang.id})}" >
+                                            <img src="img/del.png"  class="shoucang_you_img" />
+                                        </a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

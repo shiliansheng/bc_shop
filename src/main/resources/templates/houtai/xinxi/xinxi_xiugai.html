@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[信息中心]-[修改资讯]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150">
+
+
+
+
+
+
+
+                    <form name="example" method="post"   action="/houtai_xinxi_xiugai?act=xiugai_act">
+                        <table width="99%" border="0" cellspacing="1" cellpadding="5" bgcolor="#EAEAEA">
+
+                            <tr>
+                                <td bgcolor="#FFFFFF" width="15%" align="center">资讯类型</td>
+                                <td width="85%" colspan="2" bgcolor="#FFFFFF">
+                                    <!--输出1级分类，供选择-开始-->
+                                    <select name="xinxi_lxid" id="xinxi_lxid">
+                                        <option  th:value="${fenlei.id}" th:each="fenlei : ${list_fenlei}" th:selected="${fenlei.id}==${xinxi.xinxi_lxid}">
+                                            <span th:text="${fenlei.caidan_mingcheng}"></span>
+                                        </option>
+                                    </select>
+                                    <!--输出1级分类，供选择-结束-->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td bgcolor="#FFFFFF" align="center">资讯标题</td>
+                                <td  colspan="2" bgcolor="#FFFFFF">
+                                    <input type="text" name="xinxi_biaoti" size="70" th:value="${xinxi.xinxi_biaoti}" >
+                                    <input type="hidden" name="xinxi_id" th:value="${xinxi.id}" >
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td bgcolor="#FFFFFF" align="center">发布日期</td>
+                                <td  colspan="2" bgcolor="#FFFFFF">
+                                    <input type="date" name="xinxi_riqi"  th:value="${xinxi.xinxi_riqi}" >
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td bgcolor="#FFFFFF" align="center">附加选项</td>
+                                <td  colspan="2" bgcolor="#FFFFFF">
+
+                                    <input type="checkbox" value="1"  name="xinxi_jianjie_yn" id="ck01" onClick="tuijian();"
+                                          th:checked="${xinxi.xinxi_jianjie_yn}==1"
+                                    >
+                                    <label for="ck01">有推荐内容</label>
+                                    <script>
+                                        function tuijian(){
+                                            if(document.example.xinxi_jianjie_yn.checked == true){
+                                                document.getElementById("tj").style.display ="";
+                                            }else
+                                            {
+                                                document.getElementById("tj").style.display ="none";
+                                            }
+                                        }
+                                    </script>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <input type="checkbox" value="1"  name="xinxi_tupian_yn" id="ck02" onClick="slt();"
+                                           th:checked="${xinxi.xinxi_tupian_yn}==1"
+                                    >
+
+
+                                </td>
+                            </tr>
+
+
+                            <tr  id="tj" th:style="${xinxi.xinxi_jianjie_yn} ? 'display:;none' : 'display:none'" >
+
+                                <td bgcolor="#FFFFFF" align="center">推荐简介</td>
+                                <td  colspan="2" bgcolor="#FFFFFF">
+                                    <textarea name="xinxi_jianjie" rows="5"  cols="70" th:text="${xinxi.xinxi_jianjie}"></textarea>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td bgcolor="#FFFFFF"  align="center">资讯内容</td>
+                                <td colspan="2" bgcolor="#FFFFFF">
+                                    <!--富文本编辑器wangEditor-->
+                                    <link href="https://cdn.staticfile.org/wangEditor/10.0.13/wangEditor.min.css" rel="stylesheet">
+                                    <link href="https://cdn.staticfile.org/wangEditor/10.0.13/fonts/w-e-icon.woff" rel="stylesheet">
+                                    <script src="https://cdn.staticfile.org/wangEditor/10.0.13/wangEditor.min.js"></script>
+
+
+                                    <textarea id="xinxi_neirong"  name="xinxi_neirong"  style="display: none;"></textarea>
+                                    <div class="jumbotron">
+                                        <div class="container">
+                                            <div id="div1" class="toolbar"></div>
+                                            <div id="div2" class="text" style="height: 250px;" >
+                                                <p th:utext="${xinxi.xinxi_neirong}"></p>
+                                            </div>
+                                            <style>
+                                                .text{border: 1px solid gray;}
+                                            </style>
+
+                                            <script type="text/javascript">
+                                                var E = window.wangEditor
+                                                var editor = new E('#div1', '#div2')
+                                                // 或者 var editor = new E( document.getElementById('editor') )
+                                                // editor.customConfig.uploadImgShowBase64 = true // 使用 base64 保存图片
+                                                // 配置服务器端地址
+                                                editor.customConfig.uploadImgServer = '/test/upload'
+                                                // 将图片大小限制为 3M
+                                                editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
+                                                //配置指定文件名
+                                                editor.customConfig.uploadFileName = 'file'
+                                                //如果图片不大，可以用base64存储
+                                                //editor.customConfig.uploadImgShowBase64 = true
+
+                                                editor.customConfig.showLinkImg = false;
+                                                //隐藏上传网络图片的功能
+
+                                                editor.customConfig.uploadImgHooks = {
+                                                    // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+                                                    // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+                                                    customInsert : function(insertImg, result, editor) {
+                                                        // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+                                                        // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+                                                        // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+                                                        var url = result.url
+                                                        insertImg(url)
+                                                        // result 必须是一个 JSON 格式字符串！！！否则报错
+                                                    }
+                                                }
+
+                                                editor.create()
+                                            </script>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td bgcolor="#FFFFFF">&nbsp;</td>
+                                <td colspan="2" bgcolor="#FFFFFF">
+                                    <input type="submit" name="button" value="提交内容"  onclick="return tijiao()"  />
+                                    <script>
+                                        function tijiao(){
+                                            document.example.xinxi_neirong.value=editor.txt.html();
+                                            //alert(document.example.xinxi_neirong.value);
+                                            if(document.example.xinxi_biaoti.value=="" ){
+                                                alert("填写完整信息");
+                                                return  false
+                                            }
+                                            //alert(editor.txt.html()); //在线编辑器的内容
+
+                                        }
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">&nbsp;</td>
+                                <td colspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">&nbsp;</td>
+                                <td colspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+
+
+
+
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td>&nbsp;</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[密码修改]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="250" valign="top">
+
+
+                    <form name="form1"  action="/ht_mima?act=xiugai" method="post">
+                        <table width="99%" border="0" cellspacing="0" cellpadding="5">
+                            <tr>
+                                <td width="20%" align="right" bgcolor="#F1FAFF">用户名：</td>
+                                <td width="80%" bgcolor="#F1FAFF">
+                                    <span th:text="${cookie_u_name}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">原始密码：</td>
+                                <td>
+                                    <input type="text" name="mm1">
+                                    <span th:text="${jieguo}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#F1FAFF">新密 码：</td>
+                                <td bgcolor="#F1FAFF">
+                                    <input type="text" name="mm2" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><input type="submit" value=" 确认修改密码  " onClick="return check_info();"></td>
+                            </tr>
+                        </table>
+                        <script>
+                            function check_info()
+                            {
+                                if(document.form1.mm1.value=="" || document.form1.mm2.value==""){
+                                    alert("请填写原始密码和新密码！");
+                                    return false;
+                                }
+                            }
+                        </script>
+                    </form>
+
+
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td>&nbsp;</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

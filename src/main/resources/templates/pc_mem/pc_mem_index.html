@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆购物商城系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                     会员中心首页
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                    <!--首页用户信息 开始-->
+                                    <table width="90%" border="0" cellspacing="1" cellpadding="0" bgcolor="#CCCCCC">
+                                        <tr>
+                                            <td width="32%" rowspan="2" align="center" bgcolor="#FFFFFF" class="p5">
+<!--                                                <img class="layui-nav-img" th:src="${(user.avatarUrl != null && !#strings.isEmpty(user.avatarUrl)) ? '/asset/avatar/'+user.avatarUrl : '/asset/avatar/head_portrait2.png'}"/>-->
+                                                <img th:src="'upload/'+${yonghu.touxiang}" height="80" />
+                                            </td>
+                                            <td width="68%" bgcolor="#FFFFFF" class="p10">
+                                                <strong>姓名</strong>：
+                                                <span th:text="${yonghu.xingming}"></span>(<span th:text="${yonghu.xingbie}"></span>         )
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" class="p10">
+                                                <strong>QQ：</strong><span th:text="${yonghu.qq}"></span>         &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <strong>邮箱：</strong><span th:text="${yonghu.youxiang}"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" bgcolor="#FFFFFF" class="p10">
+                                                <strong>个人简介：</strong>
+                                                <span th:text="${yonghu.jianjie}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" bgcolor="#FFFFFF" class="p10">
+                                                <strong>个人详细介绍：</strong>
+                                                <span th:utext="${yonghu.jieshao}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" bgcolor="#FFFFFF" class="p10">
+                                                <a href="/pc_mem_xinxi_xiugai" style="background-color:#F60; color:#FFF; border-radius:5px; padding:10px;">
+                                                    我要去完善和修改个人信息
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--首页用户信息 结束-->
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

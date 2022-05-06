@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+</head>
+<body>
+
+
+
+<p th:text="${caozuo}"></p>
+<div th:if="${caozuo}=='xiugai'">
+    <!--修改功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_3ji_nei?act=xiugai_act">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    3级菜单名称 <input type="text" size="20" name="quanxian3_mc" th:value="${quanxian3_mc}">
+                    程序路径 <input type="text" size="20" name="quanxian3_lujing" th:value="${quanxian3_lujing}">
+                    排序ID <input type="number" name="paixu_id" style="width: 50px;" th:value="${paixu_id}">
+                    <input type="submit" value=" 修改3级菜单信息 " onClick="return checkinfo();">（id越大排序在前面）
+                    <input type="hidden" name="quanxian3_id" th:value="${quanxian3_id}" />
+                    <input type="hidden" name="quanxian2_id" th:value="${quanxian2_id}" />
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.quanxian3_mc.value=="")
+                {
+                    document.form_add.quanxian3_mc.focus();
+                    alert("对不起，请填写3级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--修改功能-结束-->
+</div>
+
+<div th:unless="${caozuo}=='xiugai'">
+    <!--添加功能-开始-->
+    <form name="form_add" method="post" action="/quanxian_caidan_3ji_nei?act=add">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" align="center">
+            <tr>
+                <td bgcolor="#E4E4E4">
+                    3级菜单名称 <input type="text" size="20" name="quanxian3_mc">
+                    程序路径 <input type="text" size="20" name="quanxian3_lujing">
+                    排序ID <input type="number" name="paixu_id" style="width: 50px;" value="1">
+                    <input type="submit" value=" 添加3级菜单 " onClick="return checkinfo();">（id越大排序在前面）
+                    <input type="hidden" name="quanxian2_id" th:value="${quanxian2_id}" />
+                </td>
+            </tr>
+        </table>
+        <script language="javascript">
+            function checkinfo()
+            {
+                if(document.form_add.quanxian3_mc.value=="")
+                {
+                    document.form_add.quanxian3_mc.focus();
+                    alert("对不起，请填写3级菜单名称！");
+                    return false;
+                }
+            }
+        </script>
+    </form>
+    <!--添加功能-结束-->
+</div>
+
+
+<!--列表-开始-->
+<table width='100%'  cellpadding='5' cellspacing='0' >
+    <tr  th:each="list_quanxian3 : ${list3}">
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian3.caidan_mingcheng}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian3.caidan_lujing}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;' th:text="${list_quanxian3.paixu_id}"></td>
+        <td style='border-bottom: 1px dotted #eeeeee;'>
+            <a th:attr="href=@{/quanxian_caidan_3ji_nei(act='xiugai',quanxian2_id=${quanxian2_id},quanxian3_id=${list_quanxian3.id},quanxian3_mc=${list_quanxian3.caidan_mingcheng},quanxian3_lujing=${list_quanxian3.caidan_lujing},paixu_id=${list_quanxian3.paixu_id})}">
+                修改</a>
+            &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <a th:attr="href=@{/quanxian_caidan_3ji_nei(act='del',quanxian2_id=${quanxian2_id},quanxian3_id=${list_quanxian3.id})}">删除</a>
+        </td>
+    </tr>
+</table>
+<!--列表-开始-->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc/pc_guanyu_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    留言反馈
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+                                    <!-- 留言反馈 开始-->
+                                    <form name="form_liuyan" method="post" action="pc_guanyu_liuyan_add">
+                                        <table width="100%"  border="0" align="center" cellpadding="3" cellspacing="1" bordercolor="#FEF5F8" bgcolor="#DFFEDA">
+                                            <tr>
+                                                <td height="20" colspan="2"   bgcolor="#DFFEDA">
+                                                    <font color="black">&nbsp; </font> <font color="#FF0000">欢迎对我<a name="liuyan_a"></a>们提出意见、建议，我们会认真答复！ </font>
+                                                    <input type="hidden" name="myadd" value="myadd">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" align="center" bgcolor="#FFFFFF"><font color="black">留言主题 </font></td>
+                                                <td align="left" bgcolor="#FFFFFF"><input type="text" name="zhuti" size="50" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="12%" height="20" align="center" bgcolor="#FFFFFF"><font color="black">联 系 人</font></td>
+                                                <td width="88%" align="left" bgcolor="#FFFFFF"> <input name="xingming" type="text" value=""  class="inputstyle250" >
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" align="center" bgcolor="#FFFFFF"><font color="black">联系电话</font> </td>
+                                                <td align="left" bgcolor="#FFFFFF"><input name="dianhua" type="text" value="" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" align="center" bgcolor="#FFFFFF"><font color="black">联系邮箱</font> </td>
+                                                <td align="left" bgcolor="#FFFFFF"><input name="youxiang" type="text" value="" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td  align="center" bgcolor="#FFFFFF"><font color="black">留言内容</font></td>
+                                                <td  align="left" valign="middle" bgcolor="#FFFFFF">
+                                                    <textarea name="neirong" cols="50" rows="4" class="inputstyle4" style="height:100px; ">这里填写详细阐述</textarea>
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+                                                <td align="left" bgcolor="#FFFFFF">
+                                                    <input type="submit"  value="提交留言信息" onClick="return checkinfo();" class="ANNIU">
+                                                    <script language="javascript">
+                                                        function checkinfo()
+                                                        {
+                                                            if(document.form_liuyan.zhuti.value=="")
+                                                            {
+                                                                document.form_liuyan.zhuti.focus();
+                                                                alert("对不起，请填写留言主题！");
+                                                                return false;
+                                                            }
+
+                                                            if(document.form_liuyan.xingming.value=="")
+                                                            {
+                                                                document.form_liuyan.xingming.focus();
+                                                                alert("对不起，请填写留言联系人！");
+                                                                return false;
+                                                            }
+
+                                                            if(document.form_liuyan.dianhua.value=="")
+                                                            {
+                                                                document.form_liuyan.dianhua.focus();
+                                                                alert("对不起，请填写留言联系电话！");
+                                                                return false;
+                                                            }
+
+                                                        }
+                                                    </script></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    <!-- 留言反馈 结束-->
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[广告设置]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150" valign="top">
+
+
+
+                    <form method="post" name="example" action="/houtai_guanggao_shezhi?act=xiugai_act">
+                        <table width="99%" border="0" cellspacing="1" cellpadding="0" bgcolor="#F2F2F2">
+                            <tr>
+                                <td bgcolor="#F7F7F7"  height="35">&nbsp;</td>
+                                <td colspan="2" bgcolor="#F7F7F7"><strong>首页广告图设置</strong></td>
+                            </tr>
+
+                            <!--第1张广告图-->
+                            <tr>
+                                <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（1）</td>
+                                <td width="50%" bgcolor="#FFFFFF">
+                                    图片地址：<input type="text" name="tpdz1" id="tpdz1" th:value="${xinxi.tpdz1}" size="40">
+                                </td>
+                                <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+                                    <iframe frameborder="0" src="/upload?formid=tpdz1" width="100%" height="25"></iframe>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    广告链接：<input type="text" name="ljdz1" th:value="${xinxi.ljdz1}"size="40">
+                                    <br>广告说明：<input type="text" name="wz1" th:value="${xinxi.wz1}"size="40">
+                                </td>
+                            </tr>
+                            <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+                            <!--第2张广告图-->
+                            <tr>
+                                <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（2）</td>
+                                <td width="50%" bgcolor="#FFFFFF">
+                                    图片地址：<input type="text" name="tpdz2" id="tpdz2" th:value="${xinxi.tpdz2}" size="40">
+                                </td>
+                                <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+                                    <iframe frameborder="0" src="/upload?formid=tpdz2" width="100%" height="25"></iframe>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    广告链接：<input type="text" name="ljdz2" th:value="${xinxi.ljdz2}" size="40">
+                                    <br>广告说明：<input type="text" name="wz2" th:value="${xinxi.wz2}" size="40">
+                                </td>
+                            </tr>
+                            <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+                            <!--第3张广告图-->
+                            <tr>
+                                <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（3）</td>
+                                <td width="50%" bgcolor="#FFFFFF">
+                                    图片地址：<input type="text" name="tpdz3" id="tpdz3" th:value="${xinxi.tpdz3}" size="40">
+                                </td>
+                                <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+                                    <iframe frameborder="0" src="/upload?formid=tpdz3" width="100%" height="25"></iframe>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    广告链接：<input type="text" name="ljdz3" th:value="${xinxi.ljdz3}" size="40">
+                                    <br>广告说明：<input type="text" name="wz3" th:value="${xinxi.wz3}" size="40">
+                                </td>
+                            </tr>
+                            <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+                            <tr>
+                                <td bgcolor="#FFFFFF">&nbsp;</td>
+                                <td colspan="2" bgcolor="#FFFFFF"  height="30">
+                                    <input type="submit" value=" 更新首页广告图设置 ">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+
+
+
+
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td  style="font-size:11px; color:gray;">欢迎！</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

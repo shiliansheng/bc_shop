@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[分组权限]-[分组权限配置]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="250" valign="top">
+
+
+
+
+<form action="/quanxian_fenzu_xiugai?act=xiugai_act"  method="post" >
+                    <input type="hidden" name="fenzu_id" th:value="${fenzu_id}" >
+                    <table width="99%" border="0" cellspacing="3" cellpadding="5" bgcolor="#F2F2F2">
+                        <tr>
+                            <td bgcolor="#E2F4FF" align="center" width="15%;"><strong>角色</strong></td>
+                            <td bgcolor="#E2F4FF"  width="70%;"><strong>权限</strong></td>
+                        </tr>
+                        <tr th:each="fenzu : ${list_fenzu}">
+                            <td bgcolor="#FFFFFF" align="center" th:text="${fenzu.fenzu_mingcheng}"></td>
+                            <td bgcolor="#FFFFFF">
+                                <!--1级权限-->
+                                <!--                                <span th:text="${fenzu.fenzu_mingcheng}"></span>-->
+                                <!--                                <span th:text="${fenzu.quanxian_1}"></span><br>-->
+                                <div th:each="quanxian1 : ${list_quanxian1}" >
+                                    <span style="font-weight: bold;" th:text="${quanxian1.caidan_mingcheng}"></span>
+
+                                    <!--嵌套2级权限-->
+                                    <div th:each="quanxian2 : ${list_quanxian2}"
+                                         th:if="${quanxian2.caidan_suoshu ==quanxian1.id}"
+                                    >
+                                        |--<span  th:text="${quanxian2.caidan_mingcheng}"></span>：
+
+                                        <!--嵌套3级权限-->
+                                        <span th:each="quanxian3 : ${list_quanxian3}"
+                                              th:if="${quanxian3.caidan_suoshu ==quanxian2.id}"
+                                        >
+                                            <input type="checkbox" name="quanxian" th:value="${quanxian3.id}"
+                                                   th:checked = "${#strings.containsIgnoreCase(fenzu.quanxian_3,quanxian3.id)}"
+                                            />
+                                            <span  th:text="${quanxian3.caidan_mingcheng}"></span>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </td>
+                        </tr>
+                    </table>
+
+                    <input type="submit" value=" 确认提交设置 ">
+
+</form>
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td>&nbsp;</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+
+</body>
+</html>

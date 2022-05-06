@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[订单中心]-[订单列表]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150">
+                    <table width="99%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">
+                        <tr>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>下单时间</strong></td>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>会员</strong></td>
+                            <td bgcolor="#E0F3FF"  width="10%"><strong>订单/费用</strong></td>
+                            <td bgcolor="#E0F3FF"  width="20%"><strong>收货信息</strong></td>
+                            <td bgcolor="#E0F3FF"  width="25%"><strong>订单商品</strong></td>
+                            <td bgcolor="#E0F3FF"  width="15%"><strong>备注</strong></td>
+                            <td bgcolor="#E0F3FF"  width="10%">操作</td>
+                        </tr>
+                        <tr th:each="xinxi : ${xinxi_list}">
+                            <td bgcolor='#FFFFFF'>
+                                <span th:text="${xinxi.shijian_xiadan}"></span>
+                            </td>
+                            <td bgcolor='#FFFFFF'>
+                                <!--用户信息-->
+                                <span th:text="${xinxi.yonghuming}"></span>
+                            </td>
+                            <td  bgcolor='#FFFFFF'>
+                                费用：¥<span th:text="${xinxi.feiyong_chengjiao}"></span><br>
+                                单号：<span th:text="${xinxi.danhao}"></span>
+                            </td>
+                            <td  bgcolor='#FFFFFF'>
+                                <!--收货信息-->
+                                <span th:text="${xinxi.xingming}"></span>-<span th:text="${xinxi.shouji}"></span><br>
+                                <span th:text="${xinxi.dizhi}"></span>
+
+                            </td>
+                            <td  bgcolor='#FFFFFF'>
+                                <!--订单商品-->
+                                <div th:each="shanpin : ${list_sql3}" th:if="${xinxi.danhao==shanpin.danhao}">
+                                    <span th:text="${shanpin.sp_mingcheng}"></span>
+                                    （ 数量：<span th:text="${shanpin.sp_shuliang}"></span>）
+                                </div>
+                            </td>
+                            <td  bgcolor='#FFFFFF'>
+                                <span th:text="${xinxi.beizhu_dingdan}"></span>
+                            </td>
+                            <td  bgcolor='#FFFFFF'>
+                                <!--订单状态 + 处理-->
+<!--                                状态=<span th:text="${xinxi.zt}"></span><br>-->
+                                <span th:if="${xinxi.zt==2}" style="color: orange;">待付款</span>
+                                <span th:if="${xinxi.zt==3}" style="color: red;">待发货</span>
+                                <span th:if="${xinxi.zt==4}" style="color: cornflowerblue;">待收货</span>
+                                <span th:if="${xinxi.zt==5}" style="color: yellowgreen;">已完结</span><br>
+
+                                <a th:attr="href=@{/houtai_dingdan_chuli(dingdan_id=${xinxi.id})}">
+                                    修改</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td  style="font-size:11px; color:gray;">
+
+                    <a href="/houtai_dingdan_list?pageNumber=0">首页</a>
+                    <a th:href="@{'houtai_dingdan_list?pageNumber='+${shang}}">上页</a>
+                    <a th:href="@{'houtai_dingdan_list?pageNumber='+${xia}}">下页</a>
+                    <a th:href="@{'houtai_dingdan_list?pageNumber='+${pageCount}}">尾页</a>
+
+                    <span th:text="${size}"></span> 条数据 |
+                    总 <span th:text="${pageCount+1}"></span> 页 |
+                    当前 <span th:text="${curPage+1}"></span> 页
+
+                </td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

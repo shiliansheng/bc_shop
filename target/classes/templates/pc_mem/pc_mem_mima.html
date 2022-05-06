@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆购物商城系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    会员中心首页
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top" align="center">
+                                    <!--密码修改 开始-->
+                                    <br>
+                                    <table width="500" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td>
+                                                <!--点击提交按钮 “确认修改密码“，post到u_mima_act.php页面验证原始密码和新密码更新-->
+                                                <form name="form1"  action="pc_mem_mima_act" method="post">
+                                                    <div class="zhuce_shouji">
+                                                        <div class="zhuce_shouji_biaoti">原始密码</div>
+                                                        <div class="zhuce_shouji_shuru">
+                                                            <!--原始密码-->
+                                                            <input type="text" placeholder="请输入新密码" name="mm1" class="zhuce_shouji_shuru_input" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="zhuce_shouji">
+                                                        <div class="zhuce_shouji_biaoti">新的密码</div>
+                                                        <div class="zhuce_shouji_shuru">
+                                                            <!--新的密码-->
+                                                            <input type="text" placeholder="请再次输入新密码" name="mm2" class="zhuce_shouji_shuru_input" />
+                                                        </div>
+                                                    </div>
+
+                                                    <!--会员-注册-附加信息-->
+                                                    <div  class="zhuce_fujia">
+                                                        <!--提交按钮 “确认修改密码“；点击按钮提交的时候调用JS函数check_info来判断是否填写”-->
+                                                        <input type="submit" value=" 确认修改密码  " class="zhuce_fujia_btn" onClick="return check_info();">
+                                                        <script>
+                                                            //自定义JS函数check_info；验证原始密码和新密码是否填写
+                                                            function check_info()
+                                                            {
+                                                                //原始密码和新密码其中任一个没有填写，则提示错误
+                                                                if(document.form1.mm1.value=="" || document.form1.mm2.value==""){
+                                                                    alert("请填写你的原始密码和新密码！"); //提示错误
+                                                                    return false;  //返回false终止网页post到u_mima_act.php页面
+                                                                }
+                                                                //没有错误，将数据post到u_mima_act.php页面处理
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--密码修改 结束-->
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

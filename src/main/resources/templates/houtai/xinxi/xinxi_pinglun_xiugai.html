@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .STYLE1 {font-size: 12px}
+        .STYLE3 {font-size: 12px; font-weight: bold; }
+        .STYLE4 {
+            color: #03515d;
+            font-size: 12px;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="30" background="tab/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="30"><img src="tab/tab_03.gif" width="12" height="30" /></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%"><div align="center"><img src="tab/tb.gif" width="16" height="16" /></div></td>
+                                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[后台管理系统]-[首页]</td>
+                            </tr>
+                        </table></td>
+                        <td width="54%">&nbsp;</td>
+                    </tr>
+                </table></td>
+                <td width="16"><img src="tab/tab_07.gif" width="16" height="30" /></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="8" background="tab/tab_12.gif">&nbsp;</td>
+                <td  height="150">
+
+                    <form action="houtai_xinxi_pinglun_caozuo?act=xiugai_act" method="post"  name="form_add">
+                        <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+                            <tr bgcolor="#FFFFFF">
+                                <td width="12%" height="30"><div align="center">当前状态</div>
+                                    <input type="hidden" name="canshu" value="">
+                                    <input type="hidden" name="pinglun_id" th:value="${xinxi.id}">
+                                </td>
+                                <td width="88%">
+                                    <!--1在购物车，还没付款；2购物车转到订单了；3已经付款，还没发货；4已经发货，流程ok -->
+                                    <select name="shenhe" >
+                                        <option value="0" th:selected="${xinxi.shenhe}==0">(1)等待审核</option>
+                                        <option value="1" th:selected="${xinxi.shenhe}==1">(2)审核通过</option>
+                                    </select><br><br>
+
+                                    审核备注：<br>
+                                    <textarea name="shenhe_beizhu" th:text="${xinxi.shenhe_beizhu}" id="shenhe_beizhu" cols="50" rows="2"></textarea>
+
+                                </td>
+                            </tr>
+                            <tr bgcolor="#FFFFFF" >
+                                <td height="30">&nbsp;</td>
+                                <td height="30">
+                                    <input type="submit" value="提交操作" >&nbsp;
+                                    <a href="javascript:history.go(-1)">返回上一页</a></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </td>
+                <td width="8" background="tab/tab_15.gif">&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td height="35" background="tab/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12" height="35"><img src="tab/tab_18.gif" width="12" height="35" /></td>
+                <td  style="font-size:11px; color:gray;">欢迎！</td>
+                <td width="16"><img src="tab/tab_20.gif" width="16" height="35" /></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>
+</html>

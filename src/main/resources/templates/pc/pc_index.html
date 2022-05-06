@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css2/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css2/style.css">
+    <link rel="stylesheet" type="text/css" href="css2/entypo.css">
+    <style>
+        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
+        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .xm:active {
+        }
+        .xm:hover {
+            box-shadow: 5px 5px 10px  #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+        }
+    </style>
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:include="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<!--轮播图片 开始-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td bgcolor="#666666">&nbsp;</td>
+        <td width="1200">
+            <div class='o-sliderContainer' id="pbSliderWrap0" style="margin-top:0;">
+
+                <div class='o-slider' id='pbSlider0'>
+                    <a th:attr="href=@{${xinxi_ad.ljdz1}}" class="o-slider--item"
+                       th:data-image="'/upload/'+${xinxi_ad.tpdz1}"  target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                    <a th:attr="href=@{${xinxi_ad.ljdz2}}" class="o-slider--item"
+                       th:data-image="'/upload/'+${xinxi_ad.tpdz2}"  target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                    <a th:attr="href=@{${xinxi_ad.ljdz3}}" class="o-slider--item"
+                       th:data-image="'/upload/'+${xinxi_ad.tpdz3}"  target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </td>
+        <td bgcolor="#666666">&nbsp;</td>
+    </tr>
+</table>
+<!--轮播图片 结束-->
+
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td align="center">
+
+    <table width="1200" border="0" cellspacing="0" cellpadding="0" align="center" style="border:1px solid #CCC;" >
+        <tr>
+            <td width="850" style="padding:5px;display:flex; flex-wrap: wrap;" valign="top"  >
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                    <tr>
+                        <td  height="35">推荐商品</td>
+                    </tr>
+                    <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                    <tr><td  height="5" colspan="2" style="padding:10px 0 5px;">
+                        <!--最新上架产品-->
+                        <div class="cp_zuixin">
+                            <a  class="cp_lianjie" target="_blank"  th:each="shangping_zuixin : ${list_shangping_zuixin}"
+                                th:href="@{/pc_shangpin_xiangqing(sp_id=${shangping_zuixin.id})}">
+                                <img  th:src="'upload/'+${shangping_zuixin.cp_tupian}" class="cp_img" />
+                                <p class="cp_mc" th:text="${shangping_zuixin.mingcheng}"></p>
+                                <p class="cp_mc2" th:text="'¥' + ${shangping_zuixin.jiage1}"></p>
+                            </a>
+                        </div>
+                    </td>
+                    </tr>
+                </table>
+
+            </td>
+            <td width="5"></td>
+            <td width="345" style="padding:5px;" valign="top" height="250">
+                <!--右侧 最新资讯 开始-->
+                <table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                    <tr>
+                        <td  height="35">最新资讯</td>
+                        <td align="right" ></td>
+                    </tr>
+                    <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                    <tr th:each="remen_wenzhang : ${list_remen_wenzhang}">
+                        <td  height="5" colspan="2" style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;">
+                            <span  style="color:#999;" th:text="${remen_wenzhang.add_riqi}"></span>
+                            <a  style="color: #333;" target="_blank"
+                                th:attr="href=@{/pc_zixun_xiangqing(xinxi_id=${remen_wenzhang.id})}" >
+                                <span th:text="${remen_wenzhang.xinxi_biaoti}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <!--右侧 最新资讯 结束-->
+            </td>
+        </tr>
+    </table>
+
+    </td></tr>
+</table>
+
+
+
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><!--100%宽度 开始-->
+    <tr><td align="center">
+
+
+        <table width="1200" border="0" cellspacing="0" cellpadding="0" align="center" style="border:1px solid #CCC;" >
+            <tr  th:each="shangpin_fenlei : ${list_shangpin_fenlei}">
+                <td width="345" style="padding:5px;" valign="top" height="250">
+
+                    <table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35"><span th:text="${shangpin_fenlei.caidan_mingcheng}"></span>-推荐商品</td>
+                            <td align="right" ></td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                        <tr th:each="shangpin_tuijian :${list_shangpin_tuijian}" th:if="${shangpin_tuijian.lx_id1 == shangpin_fenlei.id}">
+                            <td  height="5" colspan="2" style="padding:9px 0 ; border-bottom:1px dotted #CCCCCC;">
+                                <a  style="color: #333; " target="_blank"
+                                    th:href="@{/pc_shangpin_xiangqing(sp_id=${shangpin_tuijian.id})}" >
+                                    <span class="cp_mc" th:text="${shangpin_tuijian.mingcheng}"></span>
+                                    <span  style="color:red;" th:text="'¥ ' + ${shangpin_tuijian.jiage1}"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+                <td width="5"></td>
+                <td width="850" style="padding:5px;display:flex; flex-wrap: wrap;" valign="top"  >
+
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35"><span th:text="${shangpin_fenlei.caidan_mingcheng}"></td>
+                            <td align="right" >
+                                <a target="_blank" th:href="@{/pc_shangpin_list(fenlei_id=${shangpin_fenlei.id},fenlei_mc=${shangpin_fenlei.caidan_mingcheng})}">更多>></a>
+                            </td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                        <tr><td  height="5" colspan="2" style="padding:10px 0 10px;">
+                            <!--最新上架产品-->
+                            <div class="cp_zuixin">
+                                <a class="cp_lianjie" target="_blank"
+                                   th:each="shangpin : ${list_shangpin}" th:if="${shangpin.lx_id1 ==shangpin_fenlei.id }"
+                                   th:href="@{/pc_shangpin_xiangqing(sp_id=${shangpin.id})}" >
+                                     <img  th:src="'upload/'+${shangpin.cp_tupian}" class="cp_img" />
+                                     <p class="cp_mc" th:text="${shangpin.mingcheng}"></p>
+                                     <p class="cp_mc2" th:text="${shangpin.jiage1}"></p>
+                                </a>
+                            </div>
+                        </td>
+                        </tr>
+                    </table>
+
+
+                </td>
+            </tr>
+        </table>
+
+
+    </td></tr>
+</table><!--100%宽度 结束-->
+
+<span th:replace="/pc/pc_weibu"></span>
+
+<script src="js2/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="js2/hammer.min.js"></script>
+<script src='js2/slider.js'></script>
+<script>
+    $('#pbSlider0').pbTouchSlider({
+        slider_Wrap: '#pbSliderWrap0',
+        slider_Threshold: 10,
+        slider_Speed:600,
+        slider_Ease:'ease-out',
+        slider_Drag : true,
+        slider_Arrows: {
+            enabled : true
+        },
+        slider_Dots: {
+            class :'.o-slider-pagination',
+            enabled : true
+        },
+        slider_Breakpoints: {
+            default: {
+                height: 200
+            },
+            tablet: {
+                height: 150,
+                media: 1024
+            },
+            smartphone: {
+                height: 150,
+                media: 768
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+
+                        <!--信息分类 开始-->
+                        <table width="100%" border="0"  style="padding:5px; border:1px solid #CCC;"  >
+                            <tr>
+                                <td height="35" style="background:#333; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    商品分类
+                                </td>
+                            </tr>
+                            <tr th:each="xinxi_fenlei :${list_xinxi_fenlei}">
+                                <td  align="center" valign="center">
+                                    <a  th:attr="href=@{/pc_shangpin_list(fenlei_id=${xinxi_fenlei.id},fenlei_mc=${xinxi_fenlei.caidan_mingcheng})}"
+                                        th:class="${xinxi_fenlei.id+''==#httpServletRequest.getParameter('fenlei_id') ? 'bg_menu_checked' : 'bg_menu'}"
+                                    >
+                                        <span th:text="${xinxi_fenlei.caidan_mingcheng}"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--信息分类 结束-->
+
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                   <span th:text="${fenlei_mc}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+
+                                    <table width="99%"  cellspacing="1" cellpadding="5" bgcolor="#EEEEEE">
+                                        <tr>
+                                            <td bgcolor="#F7F7F7" width="10%">上架时间</td>
+                                            <td bgcolor="#F7F7F7" width="15%">商品图片</td>
+                                            <td bgcolor="#F7F7F7" width="30%">商品标题</td>
+                                            <td bgcolor="#F7F7F7" width="10%">商品类型</td>
+
+                                        </tr>
+                                        <tr  th:each="xinxi : ${xinxi_list}">
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.add_riqi}"></td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                                <a  target="_blank" th:href="@{/pc_shangpin_xiangqing(sp_id=${xinxi.id})}" >
+                                                    <img  th:src="'upload/'+${xinxi.cp_tupian}" height="66" />
+                                                </a>
+                                            </td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' >
+                                                <a  target="_blank" th:href="@{/pc_shangpin_xiangqing(sp_id=${xinxi.id})}" >
+                                                    <p th:text="${xinxi.mingcheng}"></p>
+                                                    <p th:text="'¥ ' + ${xinxi.jiage1}"></p>
+                                                </a>
+                                            </td>
+                                            <td bgcolor="#FFFFFF" style='border-bottom: 1px dotted #eeeeee;' th:text="${xinxi.caidan_mingcheng}">></td>
+                                        </tr>
+                                    </table>
+
+                                    <br>
+                                    <a th:href="@{'pc_shangpin_list?pageNumber=0&fenlei_id='+${fenlei_id}+'&feilei_mc='+${fenlei_mc}+'&chaxun_neirong='+${chaxun_neirong}}">首页</a>
+                                    <a th:href="@{'pc_shangpin_list?pageNumber='+${shang}+'&fenlei_id='+${fenlei_id}+'&feilei_mc='+${fenlei_mc}+'&chaxun_neirong='+${chaxun_neirong}}">上页</a>
+                                    <a th:href="@{'pc_shangpin_list?pageNumber='+${xia}+'&fenlei_id='+${fenlei_id}+'&feilei_mc='+${fenlei_mc}+'&chaxun_neirong='+${chaxun_neirong}}">下页</a>
+                                    <a th:href="@{'pc_shangpin_list?pageNumber='+${pageCount}+'&fenlei_id='+${fenlei_id}+'&feilei_mc='+${fenlei_mc}+'&chaxun_neirong='+${chaxun_neirong}}">尾页</a>
+
+                                    <span th:text="${size}"></span> 条数据 |
+                                    每页 <span th:text="${PAGESIZE}"></span> 条 |
+                                    总 <span th:text="${pageCount+1}"></span> 页 |
+                                    当前 <span th:text="${curPage+1}"></span> 页
+
+
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

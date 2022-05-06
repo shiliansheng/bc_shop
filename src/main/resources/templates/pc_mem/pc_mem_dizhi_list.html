@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+    <link rel="stylesheet" href="css/huiyuan_dizhi_liebiao.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    会员中心 > 地址列表
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+
+                                    <script language="javascript">
+                                        function pc_mem_dizhi_del(url)
+                                        {
+                                            //alert(url);
+                                            if (confirm("确定要删除该信息？删除后不可恢复!"))
+                                            {
+                                                window.location.href="pc_mem_dizhi_del?cs_id="+url;
+                                            }
+                                        }
+                                    </script>
+
+                                    <div class="dizhi_liebiao">
+                                        <div class="dizhi_liebiao_xiangmu" th:each="dizhi : ${list_dizhi}">
+                                            <div class="dizhi_liebiao_xiangmu_zuo">
+                                                <div class="dizhi_liebiao_xiangmu_zuo_txt1">
+                                                    <span th:text="${dizhi.xingming}"></span>
+                                                    -
+                                                    <span th:text="${dizhi.shouji}"></span>
+                                                </div>
+                                                <div class="dizhi_liebiao_xiangmu_zuo_txt2">
+                                                    <span th:text="${dizhi.dizhi}"></span>
+                                                </div>
+                                                <div class="dizhi_liebiao_xiangmu_zuo_txt3" th:if="${dizhi.yn_moren==1}">
+                                                    <div class="dizhi_liebiao_xiangmu_zuo_moren">默认地址</div>
+                                                </div>
+                                            </div>
+                                            <a class="dizhi_liebiao_xiangmu_you"
+                                                th:href="@{/pc_mem_dizhi_xiugai(act='xiugai',cs_id=${dizhi.id})}"
+                                            >
+                                                 <img src="img/xiugai.png" class="dizhi_liebiao_xiangmu_you_img" />
+                                            </a>
+                                            <a class="dizhi_liebiao_xiangmu_you"  style="cursor: pointer;"
+                                               th:onclick="'javascript:pc_mem_dizhi_del('+${dizhi.id}+')' "
+                                            >
+                                                 <img src="img/del.png" class="dizhi_liebiao_xiangmu_you_img" />
+                                            </a>
+                                        </div>
+                                        <div class="height10"></div>
+
+                                        <div class="caozuo">
+                                            <div class="caozuo_tianjia"><a  href="/pc_mem_dizhi_add" class="caozuo_tianjia_btn">添加新地址</a></div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

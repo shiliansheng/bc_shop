@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/toubu_fanhui.css">
+    <link rel="stylesheet" href="css/huiyuan_zhuce.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/end.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>&nbsp;</td>
+        <td width="1200">
+
+            <br><br><br>
+            <table width="100%" border="0">
+                <tr>
+                    <td  align="center"><img src="img/bg2.png" height="400" ></td>
+                    <td  width="500" style="border:1px solid #E4E4E4; border-radius:20px; box-shadow:3px 3px 5px  #999999">
+
+
+                        <form name="frm" method="post">
+                            <!--头部返回-->
+                            <div class="dingbu">
+                                <a href="javascript:history(-1)" class="dingbu_lianjie">
+                                    <img src="img/back.png"  alt="" class="dingbu_lianjie_img" />
+                                </a>
+                                <p class="dingbu_biaoti">会员注册</p>
+                            </div><br>
+
+                            <!--会员-注册-信息部分-->
+                            <div class="zhuce_shouji" style="border-top:1px solid #f2f2f2;">
+                                <div class="zhuce_shouji_biaoti">手机号</div>
+                                <div class="zhuce_shouji_shuru">
+                                    <!--手机号-->
+                                    <input type="text" placeholder="请输入手机号码" class="zhuce_shouji_shuru_input" name="yonghuming" id="yonghuming" />
+                                </div>
+                            </div>
+                            <div class="zhuce_shouji">
+                                <div class="zhuce_shouji_biaoti">设置密码</div>
+                                <div class="zhuce_shouji_shuru">
+                                    <!--新密码-->
+                                    <input  type="password" placeholder="请输入新密码" class="zhuce_shouji_shuru_input" name="mima_1" id="mima_1" />
+                                </div>
+                            </div>
+                            <div class="zhuce_shouji">
+                                <div class="zhuce_shouji_biaoti">确认密码</div>
+                                <div class="zhuce_shouji_shuru">
+                                    <!--确认密码-->
+                                    <input type="password" placeholder="请再次输入新密码" class="zhuce_shouji_shuru_input" name="mima_2" id="mima_2" />
+                                </div>
+                            </div>
+                            <!--下面是JS验证和提交代码-->
+                            <script>
+                                function checkinfo()
+                                {
+                                    //先获取要注册的手机号、密码和确认密码
+                                    //第一步：判断手机号码是否正确；第二步：判断密码和确认密码是否正确；第三步：提交注册
+                                    //判断手机号码 开始
+                                    var shouji = document.frm.yonghuming.value; //获取手机号码
+                                    if(shouji==""){ //手机号码为空
+                                        alert("请输入手机号码！");//弹出提示信息
+                                        return false;  //中断执行和提交
+                                    }else{ //手机号码填写了
+                                        if(shouji.length!=11) //手机号码长度错误
+                                        {
+                                            alert("请输入11位有效的手机号码!"); //弹出提示错误
+                                            document.frm.yonghuming.focus();//手机号输入框重新获得焦点
+                                            return false;//中断执行和提交
+                                        }
+                                        //下面定义正则表达式来验证手机的有效性
+                                        //var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; //定义正则表达式
+                                       // if(!myreg.test(shouji)) //输入的手机号不匹配我们定义的正则表达式，说明手机号码错误
+                                       // {
+                                       //     alert("请输入有效的真实手机号码！"); //弹出提示错误
+                                        //    document.frm.yonghuming.focus();//手机号输入框重新获得焦点
+                                        //    return false;//中断执行和提交
+                                       // }
+                                    }//判断手机号码 结束
+
+                                    //下面判断密码和确认密码必须填写
+                                    if(document.frm.mima_1.value=="") //密码为空
+                                    {
+                                        alert("请输入密码");  //弹出提示错误
+                                        document.frm.mima_1.focus();//密码输入框重新获得焦点
+                                        return false;//中断执行和提交
+                                    }
+                                    //下面判断密码和确认密码必须一致
+                                    if(document.frm.mima_1.value!=document.frm.mima_2.value)//密码和确认密码不相同
+                                    {
+                                        alert("两次输入的密码不同，请重新输入"); //弹出提示错误
+                                        document.frm.mima_1.focus();  //密码输入框重新获得焦点
+                                        document.frm.mima_1.value=""; //密码输入框内容清空，等待重新填写
+                                        document.frm.mima_2.value=""; //确认密码输入框内容清空，等待重新填写
+                                        return false;//中断执行和提交
+                                    }
+                                    //前面判断手机号、密码和确认密码都ok后，将数据提交到注册接口
+                                    var yhm = document.frm.yonghuming.value;
+                                    var mm = document.frm.mima_1.value;
+                                    //定义了一个隐藏的iframe，然后将数据作为参数加载到页面check_h_reg.php来注册
+                                    //这里你也可以用AJAX、Xmlhttp等方式来处理
+                                    frm01.location = "/check_mem_reg?cs_yhm="+yhm+"&cs_mm="+mm ;
+                                }
+                            </script>
+                            <iframe name="frm01" src="" width="0" height="0" frameborder="0"></iframe>
+
+                            <!--会员-注册-附加信息-->
+                            <div  class="zhuce_fujia">
+                                <div class="zhuce_fujia_tongyi">
+<!--                                    <input type="checkbox" class="zhuce_fujia_tongyi_chk" />-->
+                                    阅读并同意《注册协议》
+                                </div>
+                                <!--button class="zhuce_fujia_btn" onClick="return checkinfo();"> 注册并登陆</button-->
+                                <!--会员-注册-提交按钮-->
+                                <input  type="button"  class="zhuce_fujia_btn"  value=" 提交注册 "  onClick="return checkinfo();" >
+
+                                <div class="zhuce_fujia_shuoming">登陆账号为您输入的手机号码</div>
+                                <a href="#" class="zhuce_fujia_xieyi">查看注册协议</a>
+                            </div>
+
+                        </form>
+
+                    </td>
+                </tr>
+            </table>
+
+
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

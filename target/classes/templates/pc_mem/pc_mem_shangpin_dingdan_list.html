@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆购物商城系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+    <link rel="stylesheet" href="css/huiyuan_dingdan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <span th:replace="/pc_mem/pc_mem_left"></span>
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    会员中心 > 商品订单中心
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+                                    <div class="caidan">
+                                        <!--根据订单状态，显示当前选中的栏目-->
+                                        <a href="pc_mem_shangpin_dingdan_list?cs_zt=2" class=''
+                                           th:class="${cs_zt=='2' ? 'caidan_putong caidan_xuanzhong' : 'caidan_putong'}"
+                                         >待付款</a>
+
+                                        <a href="pc_mem_shangpin_dingdan_list?cs_zt=3"
+                                           th:class="${cs_zt=='3' ? 'caidan_putong caidan_xuanzhong' : 'caidan_putong'}"
+                                         >待发货</a>
+
+                                        <a href="pc_mem_shangpin_dingdan_list?cs_zt=4"
+                                           th:class="${cs_zt=='4' ? 'caidan_putong caidan_xuanzhong' : 'caidan_putong'}"
+                                        >待收货</a>
+
+                                        <a href="pc_mem_shangpin_dingdan_list?cs_zt=5"
+                                           th:class="${cs_zt=='5' ? 'caidan_putong caidan_xuanzhong' : 'caidan_putong'}"
+                                         >已完结</a>
+
+                                        <a href="pc_mem_shangpin_dingdan_list?cs_zt=0"
+                                           th:class="${cs_zt=='0' ? 'caidan_putong caidan_xuanzhong' : 'caidan_putong'}"
+                                         >全部</a>
+                                    </div>
+                                    <div class="huise10"></div>
+
+                                    <!--订单-->
+                                    <div class="dingdan" th:each="dingdan : ${list_dingdan}">
+                                        <!--订单-单号栏目-->
+                                        <div class="dingdan_danhao"  >
+                                            <p class="dingdan_danhao_zuo">
+                                                单号：<span th:text="${dingdan.danhao}"></span>
+                                                （费用：¥ <span th:text="${dingdan.feiyong_chengjiao}"></span>）-
+                                                <span th:if="${dingdan.zt==2}" style="color: orange;">待付款</span>
+                                                <span th:if="${dingdan.zt==3}" style="color: red;">待发货</span>
+                                                <span th:if="${dingdan.zt==4}" style="color: cornflowerblue;">待收货</span>
+                                                <span th:if="${dingdan.zt==5}" style="color: yellowgreen;">已完结</span>
+                                            </p>
+                                            <p class="dingdan_danhao_you" th:text="${dingdan.shijian_xiadan}">
+                                            </p>
+                                        </div>  <!--订单-单号栏目-->
+
+                                        <!--订单-产品-->
+                                        <div class="dingdan_chanpin"  th:each="shangpin : ${list_shangpin}" th:if="${dingdan.danhao==shangpin.danhao}">
+                                            <div class="dingdan_chanpin_tupian">
+                                                <img th:src="'upload/'+${shangpin.cp_tupian}" class="dingdan_chanpin_tupian_img"/>
+                                            </div>
+                                            <div class="dingdan_chanpin_xinxi">
+                                                <div class="dingdan_chanpin_xinxi_biaoti" th:text="${shangpin.sp_mingcheng}">
+
+                                                </div>
+                                                <div class="dingdan_chanpin_xinxi_fujia">
+                                                    库存：<span th:text="${shangpin.kucun}"></span> |
+                                                    已销售：<span th:text="${shangpin.yixiaoshou}"></span>
+                                                </div>
+                                                <div class="dingdan_chanpin_xinxi_shuliang">
+                                                    <div class="dingdan_chanpin_xinxi_shuliang_zuo">
+                                                        ¥ <span th:text="${shangpin.jiage_shichang}"></span>
+                                                    </div>
+                                                    <div class="dingdan_chanpin_xinxi_shuliang_you">
+                                                        数量 X <span th:text="${shangpin.sp_shuliang}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  <!--订单-产品-->
+
+                                        <!--订单-操作信息-->
+                                        <div class="dingdan_caozuo">
+
+                                            <span th:if="${dingdan.zt==2}">
+                                                <a class="dingdan_caozuo_xiangmu" target="_blank"
+                                                   th:href="@{/pc_mem_shop_dingdan_del(dingdan_id=${dingdan.id})}" >
+                                                    取消订单
+                                                </a>
+                                                <a class="dingdan_caozuo_xiangmu" target="_blank"
+                                                   th:href="@{/pc_mem_shop_dingdan_fukuan(dingdan_id=${dingdan.id})}" >
+                                                    去付款
+                                                </a>
+                                            </span>
+
+                                            <span th:if="${dingdan.zt==3}">
+                                                <p  class='dingdan_caozuo_xiangmu'>待发货</p>
+                                            </span>
+
+                                            <span th:if="${dingdan.zt==4}">
+                                                <span  class='dingdan_caozuo_xiangmu' style='color:green;' th:text="'发货信息：'+${dingdan.beizhu_fahuo}">
+                                                </span>
+
+                                                <a class="dingdan_caozuo_xiangmu" target="_blank"
+                                                   th:href="@{/pc_mem_shop_dingdan_shouhuo(dingdan_id=${dingdan.id})}" >
+                                                    确认收货
+                                                </a>
+                                            </span>
+
+                                            <span th:if="${dingdan.zt==5}">
+                                                <p  class='dingdan_caozuo_xiangmu'>订单已完结</p>
+                                            </span>
+
+                                        </div><!--订单-操作信息-->
+
+                                    </div> <!--订单-->
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>

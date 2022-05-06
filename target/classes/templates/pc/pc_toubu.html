@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="css/index.css">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!--顶部第一行菜单 开始-->
+<div class="tou1_bg">
+    <div class="tou1_1200">
+        <div class="tou1_zuo">
+
+            美妆购物商城，欢迎您的到来！
+            <ul class="menu">
+                <li>
+                </li>
+            </ul>
+        </div>
+        <div class="tou1_you">
+            <span th:if="${#session.getAttribute('mem_id')==null}">
+                <span>注册用户</span>
+                <a href="pc_huiyuan_denglu" class="red">[请登录]</a>
+                &nbsp;&nbsp;<img src="img/l.png">&nbsp;&nbsp;
+                <span>新用户</span>
+                <a href="pc_huiyuan_zhuce" class="red">[免费注册]</a>
+            </span>
+            <span th:if="${#session.getAttribute('mem_id')!=null}">
+                <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                      th:if="${cookie.getName().equals('mem_name')}"
+                >
+                    登录用户=<span th:text="${cookie.getValue()}"></span> |
+                    用户id=<span th:text="${#session.getAttribute('mem_id')}"></span> |
+                    <a href="/pc_mem_index">用户中心</a> |
+                    <a href="/pc_shangpin_gouwuche">我的购物车</a>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+<!--顶部第一行菜单 结束-->
+
+<!--顶部第1行菜单 开始-->
+<form name="form_chaxun" method="post" action="/pc_shangpin_chaxun">
+    <div class="tou2">
+        <div class="tou2_1200">
+            <div class="tou2_zuo">
+                <a href="/pc_index"><img src="img/logo.png" width="350" height="70"></a>
+            </div>
+            <div class="tou2_zhong">
+                <div class="tou2_zhong_shang">
+                </div>
+                <div class="tou2_zhong_zhong">
+                    <input type="text" name="chaxun_neirong"  class="cx">
+                    <input type="submit" value=" 搜索 " class="cxbutton">
+                </div>
+                <div class="tou2_zhong_xia">
+                    <span th:each="mykey:${#session.getAttribute('arr_key')}">
+                        <a th:attr="href=@{/pc_shangpin_list(chaxun_neirong=${mykey})}"
+                           class="gray" th:text="${mykey}">关键词1</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                </div>
+            </div>
+
+            <div class="tou2_you">
+                <div class="tou2_you_shang">
+                </div>
+                <div class="tou2_you_zhong">
+                    <a class="tou2_you_zhong_che" href="pc_guanyu_liuyan">
+                        <div><img src="img/icon-kefu.png" width="30" height="30"></div>
+                        <div class="che_wenzi">留言反馈</div>
+                        <!--p class="gouwucheshu">5</p-->
+                    </a>
+                </div>
+                <div class="tou2_you_xia">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--顶部第2行菜单 结束-->
+
+<!--顶部第3行菜单 开始-->
+<div class="tou3">
+    <div class="tou3_1200">
+        <a  href="/pc_index"  th:class="${#httpServletRequest.getServletPath}=='/pc_index' ? 'tou1_1' : 'tou1_2'">
+            网站首页
+        </a>
+<!--        ${#httpServletRequest.getServletPath=='/pc_zixun_list'} and-->
+        <a
+            th:attr="href=@{/pc_shangpin_list(fenlei_id=${xinxi_fenlei.id},fenlei_mc=${xinxi_fenlei.caidan_mingcheng})}"
+            th:each="xinxi_fenlei :${#session.getAttribute('list_fenlei_dingbu')}"
+            th:class="${#httpServletRequest.getServletPath=='/pc_shangpin_list' &&xinxi_fenlei.id+''==#httpServletRequest.getParameter('fenlei_id') ? 'tou1_1' : 'tou1_2'}"
+        >
+            <span th:text="${xinxi_fenlei.caidan_mingcheng}"></span>
+        </a>
+
+        <a  href="/pc_zixun_list?fenlei_id=256&fenlei_mc=平台公告"
+            th:class="${#httpServletRequest.getServletPath=='/pc_zixun_list' && #httpServletRequest.getParameter('fenlei_id')=='256'}  ? 'tou1_1' : 'tou1_2'">
+            平台公告
+        </a>
+        <a  href="/pc_zixun_list?fenlei_id=257&fenlei_mc=购物指南"
+            th:class="${#httpServletRequest.getServletPath=='/pc_zixun_list' && #httpServletRequest.getParameter('fenlei_id')=='257'}  ? 'tou1_1' : 'tou1_2'"   >
+            购物指南
+        </a>
+
+        <a  href="/pc_guanyu_women?id=2"
+            th:class="${#httpServletRequest.getServletPath=='/pc_guanyu_women'}  ? 'tou1_1' : 'tou1_2'"   >
+            关于我们
+        </a>
+
+
+        <a class="tou1_3" href="/pc_shangpin_list">
+            <img src="img/li.png" width="130px" height="50px">
+        </a>
+
+    </div>
+</div>
+<!--顶部第3行菜单 结束-->

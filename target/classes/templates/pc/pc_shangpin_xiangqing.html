@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>美妆商城购物系统</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/end.css">
+    <link rel="stylesheet" href="css/huiyuan_mima.css">
+    <link rel="stylesheet" href="css/huiyuan.css">
+</head>
+<body>
+<!--头部 开始-->
+<span th:replace="/pc/pc_toubu"></span>
+<!--<span th:replace="/pc_toubu"></span>-->
+<!--<span th:replace="/pc/pc_top(cs='abc')"></span>-->
+<!--头部 结束-->
+
+<table width="100%" border="0">
+ <tr><td align="center">
+
+<table width="1200" border="0" align="center">
+    <tr>
+        <td width="200" valign="top">
+            <span th:replace="/pc/pc_guanyu_left"></span>
+        </td>
+        <td width="5"></td>
+        <td valign="top" >
+
+ <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                        <tr>
+                            <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;">
+                                &nbsp;&nbsp;商品详情</td>
+                        </tr>
+                        <tr>
+                            <td  style="padding:5px; line-height:2;"  height="340"  valign="top">
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#CCCCCC">
+    <tr>
+        <td bgcolor="#FFFFFF" width="300" style="padding:10px;">
+            <img class="lunbo_img" th:src="'upload/'+${xinxi.cp_tupian}"  width="300" />
+        </td>
+        <td bgcolor="#FFFFFF" style="padding:10px;" valign="top">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td colspan="2" style="color:#333; font-size:20px; padding:10px;border-bottom:1px #EAEAEA dotted;">
+                        <span th:text="${xinxi.mingcheng}"></span>
+                    </td>
+                </tr>
+                <tr><td height="1" colspan="2"  bgcolor="#CCCCCC"></td></tr>
+                <tr>
+                    <td style="border-bottom:1px #EAEAEA dotted;padding:10px;">
+                        浏览：<span th:text="${liulanshu}"></span>次&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        收藏：<span th:text="${size_shoucangshu}"></span>次&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        评论：<span th:text="${size_pinglunshu}"></span>次
+                    </td>
+                    <td style="border-bottom:1px #EAEAEA dotted;padding:10px;" width="100px;" align="right">
+                        <span th:if="${#session.getAttribute('mem_id')!=null}">
+                        <!--下面是JS验证和提交代码-->
+                        <script>
+                            function shoucang(sp_id)
+                            {
+                                var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                url = "/api_shop_sp_shoucang?sp_id="+sp_id + "&u_id=" + mem_id;
+                                //alert(url);
+                                frame01.location = url;
+                            }
+                        </script>
+                        <input  type="button"  style="background-color: #399; color:#FFF; padding:8px; border-radius:5px; border:0;" value=" 收藏商品 "
+                                th:onclick="'javascript:shoucang('+${xinxi.id}+')' "
+                        >
+                        </span>
+                        <iframe width="0" height="0" frameborder="0" name="frame01" src=""></iframe>
+                        <span th:if="${#session.getAttribute('mem_id')==null}">
+                            <a style="background-color:  #399; color:#FFF; padding:8px; border-radius:5px; cursor:pointer;"
+                               onclick=go_login('/pc_huiyuan_denglu')>登录后收藏</a>
+                        </span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom:1px #EAEAEA dotted;padding:10px;">
+                        <span style="color: #999;">
+                            <span th:text="${xinxi.jianjie}"></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom:1px #EAEAEA dotted;padding:10px;">
+                        商品价格：<span style="color: #F30; font-size:18px;">¥ <span th:text="${xinxi.jiage1}"></span> 元</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom:1px #EAEAEA dotted;padding:10px;">
+                        商品属性：
+                        库存：<span th:text="${xinxi.kucun}"></span> 件 |
+                        已销：<span th:text="${xinxi.yixiaoshou}"></span> 件
+                    </td>
+                </tr>
+                <tr><td height="1" colspan="2"  bgcolor="#CCCCCC"></td></tr>
+                <tr>
+                    <td  style="background-color:#F2F2F2; padding:10px;">
+
+                        <span th:if="${#session.getAttribute('mem_id')!=null}">
+                            <input  type="button"  style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px; border:0;" value=" 加购物车 "
+                                    th:onclick="'javascript:gwc('+${xinxi.id}+')' "
+                            >
+                            <input  type="button"  style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px; border:0;" value=" 立即购买 "
+                                    th:onclick="'javascript:goumai('+${xinxi.id}+')' "
+                            >
+                            <script language="javascript">
+                                function gwc(sp_id)
+                                {
+                                    var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                    var sp_mc = "[[${xinxi.mingcheng}]]"; //商品名称，别忘记加双引号
+                                    var sp_jiage1 = [[${xinxi.jiage1}]];  //商品价格
+                                    var url = "/api_shop_sp_gouwuche?sp_id="+sp_id + "&u_id=" + mem_id + "&sp_jiage1=" + sp_jiage1 + "&sp_mc=" +sp_mc;
+                                    //var url = "/api_shop_sp_gouwuche?sp_id="+ sp_id + "&u_id=" + mem_id ;
+                                    //alert(url);
+                                    frm01.location = url;
+                                }
+                                function goumai(sp_id)
+                                {
+                                    var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                    var sp_mc = "[[${xinxi.mingcheng}]]"; //商品名称，别忘记加双引号
+                                    var sp_jiage1 = [[${xinxi.jiage1}]];  //商品价格
+                                    var url = "/api_shop_sp_goumai?sp_id="+sp_id + "&u_id=" + mem_id + "&sp_jiage1=" + sp_jiage1 + "&sp_mc=" +sp_mc;
+                                    //var url = "/api_shop_sp_gouwuche?sp_id="+ sp_id + "&u_id=" + mem_id ;
+                                    //alert(url);
+                                    frm01.location = url;
+                                }
+                            </script>
+                        </span>
+
+                        <span th:if="${#session.getAttribute('mem_id')==null}">
+                            <input  type="button"  style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px; border:0;"
+                                    value=" 加购物车 "  onClick="go_login('/pc_huiyuan_denglu')" >
+                            <input  type="button"  style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px; border:0;"
+                                    value=" 立即购买 "  onClick="go_login('/pc_huiyuan_denglu')" >
+                        </span>
+
+                    </td>
+                    <td  style="background-color:#F2F2F2; padding:10px;" align="right">
+
+                        <span th:if="${#session.getAttribute('mem_id')!=null}">
+                            <a style="background-color:  #399; color:#FFF; padding:8px; border-radius:5px; cursor:pointer;" href="/pc_shangpin_gouwuche")>去购物车结算</a>
+                        </span>
+
+                        <span th:if="${#session.getAttribute('mem_id')==null}">
+                            <a style="background-color:  #399; color:#FFF; padding:8px; border-radius:5px; cursor:pointer;" onclick=go_login('/pc_huiyuan_denglu')>去购物车结算</a>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+
+
+
+        </td>
+    </tr>
+</table>
+
+
+<br>
+
+<!--商品简介 开始-->
+<table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+    <tr>
+        <td  style="padding:5px; line-height:2;"  height="340"  valign="top">
+            <div id="divcss5">
+                <div class="nav">
+                    <div class="nav_current" id="nav1" onClick="javascript:doClick(this)">商品详情</div>
+                    <div class="nav_link" id="nav2" onClick="javascript:doClick(this)">商品评论</div>
+                </div>
+                <div class="nav-down">
+                    <div class="dis" id="sub1">
+                        <span th:utext="${xinxi.neirong}"></span>
+                    </div>
+                    <div class="undis" id="sub2">
+                        <!--评论 开始-->
+                        <form name="frm" method="post">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td  width="60%" style="padding:5px;">
+                                        <textarea cols="70" rows="4" name="neirong" id="neirong"></textarea>
+                                    </td>
+                                    <td  style="padding:3px;" valign="top">
+                                        评论区，不可发布不当言论；评论审核后可见！<br>
+                                        <span th:if="${#session.getAttribute('mem_id')!=null}">
+                                                    <input  type="button"  style="border:none;background-color: red;color: white;padding: 5px;border-radius: 5px;" value=" 提交评论信息 "
+                                                            th:onclick="'javascript:pinglun('+${xinxi.id}+')' ">
+                                            <!--下面是JS验证和提交代码-->
+                                                    <script>
+                                                        function pinglun(sp_id)
+                                                        {
+                                                            //下面判断密码和确认密码必须填写
+                                                            if(document.frm.neirong.value=="") //为空
+                                                            {
+                                                                alert("请输入评论");  //弹出提示错误
+                                                                document.frm.neirong.focus();//重新获得焦点
+                                                            }else{
+                                                                var mem_id = [[${session.mem_id}]]; //登录的用户id
+                                                                var neirong = document.frm.neirong.value;
+                                                                var url = "api_shop_sp_pinglun_add?u_id="+mem_id+"&sp_id="+sp_id+"&neirong="+neirong;
+                                                                //alert(url);
+                                                                frm01.location = url;
+                                                                document.frm.neirong.value="";
+                                                            }
+
+                                                        }
+                                                    </script>
+                                                    <iframe name="frm01" src="" width="0" height="0" frameborder="0"></iframe>
+                                        </span>
+                                        <span th:if="${#session.getAttribute('mem_id')==null}">
+                                            <span style="color:#ff0000;">请登录后发表评论</span>
+                                        </span>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <!--评论信息  开始-->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                            <tr th:each="pinglun :${list_pinglun}">
+                                <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;">
+                                    <span  style="color:#999;" th:text="${pinglun.riqi}"></span>
+                                    <span  style="color:#999;" th:text="${pinglun.neirong}"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--评论信息 结束-->
+                    </div>
+                </div>
+            </div>
+            <style>
+                .nav{ display:flex; background-color:#F6F6F6}
+                .nav_current{ background-color:#F60; color:#FFF; padding:5px 50px;; border-top-left-radius:5px; border-top-right-radius:5px; margin-right:10px; cursor:pointer;}
+                .nav_link{ background-color:#CCC; padding:5px 50px; color:#333;border-top-left-radius:5px; border-top-right-radius:5px; margin-right:10px; cursor:pointer;}
+            </style>
+            <script>
+                function doClick(o){
+                    o.className="nav_current";
+                    var j;
+                    var id;
+                    var e;
+                    for(var i=1;i<=2;i++){ //这里3 需要你修改 你多少条分类 就是多少
+                        id ="nav"+i;
+                        j = document.getElementById(id);
+                        e = document.getElementById("sub"+i);
+                        if(id != o.id){
+                            j.className="nav_link";
+                            e.style.display = "none";
+                        }else{
+                            e.style.display = "block";
+                        }
+                    }
+                }
+            </script>
+        </td>
+    </tr>
+</table>
+<!--商品简介 结束-->
+
+
+                            </td>
+                        </tr>
+                    </table>
+
+        </td>
+    </tr>
+</table>
+
+</td></tr>
+</table>
+
+
+<span th:replace="/pc/pc_weibu"></span>
+
+</body>
+</html>
